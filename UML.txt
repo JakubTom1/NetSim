@@ -1,0 +1,61 @@
+@startuml
+
+class Package{
+    + Package()
+    + Package(ElementID)
+    + Package(Package& {query})
+    + Package(Package&&)
+    + operator=(Package&&) : Package&
+    + get_id() : ElementID {query}
+    + ~Package()
+    - id_ : ElementID
+    - {static} assigned_IDs : std::set<ElementID>
+    - {static} freed_IDs : std::set<ElementID>
+}
+class ElementID << (T,orchid) primitive>>
+
+enum PackageQueueType <<enumeration>> {
+    FIFO
+    LIFO
+}
+
+interface IPackageStockpile <<interface>>{
+     + {abstract} push(Package&&) : void
+     + {abstract} empty() : bool {query}
+     + {abstract} size() : size_type {query}
+     + {abstract} begin() : IPackageStockpile::const_iterator {query}
+     + {abstract} cbegin() : IPackageStockpile::const_iterator {query}
+     + {abstract} end() : IPackageStockpile::const_iterator {query}
+     + {abstract} cend() : IPackageStockpile::const_iterator {query}
+     + ~IPackageStockpile()
+}
+
+interface IPackageQueue <<interface>>{
+    + {abstract} pop() : Package
+    + {abstract} get_queue_type() : PackageQueueType {query}
+}
+
+class PackageQueue {
+    + PackageQueue(type : PackageQueueType)
+    + get_queue_type : PackageQueueType
+    + size() : size_t
+    + empty() : bool
+    + push(pkg : Package&&) : void
+    + pop() : Package
+    + begin() : IPackageStockpile::const_iterator {query}
+    + cbegin() : IPackageStockpile::const_iterator {query}
+    + end() : IPackageStockpile::const_iterator {query}
+    + cend() : IPackageStockpile::const_iterator {query}
+    + ~PackageQueue()
+    - container_ : std::list<Package>
+    - queue_type_ : PackageQueueType
+}
+Package *-- ElementID
+IPackageStockpile *-- Package
+IPackageStockpile <|.. IPackageQueue
+IPackageQueue *-- PackageQueueType
+IPackageQueue *-- Package
+IPackageQueue <|.. PackageQueue
+PackageQueue *--PackageQueueType
+PackageQueue *-- Package
+@enduml
