@@ -43,5 +43,5 @@ The unit of time in the simulation is a turn. Each turn consists of stages, cons
   4. Reporting on the state of the simulation (if applicable for a given turn)
 We have assumed that within each stage of the simulation, nodes are considered sequentially, in ascending order of ID (so, for example, worker #1 performs the task first, then worker #2, etc.) - this eliminates the need to use multi-threading mechanisms.
 The simulation time starts from 1 (i.e. the first turn has ID 1).
-
+#
 _This repository is a copy of original, private repository and does not reflect the number of commits added by each of the contributors._
