@@ -1,5 +1,5 @@
 ## NetSim
-# Network Simulation Group project in C++
+# Network Simulation Group Project in C++
 
 This is a group project created for the "Advanced Object-Oriented Programming" course. It's goal was to design and implement a system for modeling and simulating the operation of a network - using the example of "production lines" in a factory.
 
@@ -36,10 +36,12 @@ For a given network model (loaded from a file), we want to be able to simulate i
 The unit of time in the simulation is a turn. Each turn consists of stages, considered in the following order:
 
   1. Delivery of semi-finished products to ramps
-  __Semi-finished products "appear" on the ramp.__
+  _Semi-finished products "appear" on the ramp._
   2. Transfer of semi-finished products to recipients.
-  __The semi-finished product is instantly transferred from the sender to the recipient - it is never "in transit."__
+  _The semi-finished product is instantly transferred from the sender to the recipient - it is never "in transit."_
   3. Processing of semi-finished products by workers.
   4. Reporting on the state of the simulation (if applicable for a given turn)
 We have assumed that within each stage of the simulation, nodes are considered sequentially, in ascending order of ID (so, for example, worker #1 performs the task first, then worker #2, etc.) - this eliminates the need to use multi-threading mechanisms.
 The simulation time starts from 1 (i.e. the first turn has ID 1).
+
+_This repository is a copy of original, private repository and does not reflect the number of commits added by each of the contributors._
